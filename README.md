@@ -54,44 +54,21 @@ ng version
 ![test cli](img/image-3.png)  
 Notre navigateur s'ouvre alors sur un résumé des tests unitaires
 ![test navigateur](img/image-4.png)
-Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+#### 5.2 Construction d'un pipeline dans AWS CodePipeline
 
+On construit un pipeline avec les caractéristiques suivantes :  
+- on créé une connexion avec notre repository githug
+- on créé un projet Build (CodeBuild)
 
+#### 5.2 Construction d'un Build dans AWS CodeBuild
 
+Lors de la création d'un Pipeline, on est invité à créer un projet Build.  
+On en créé un avec les caractéristiques suivantes :  
+- on lui affecte un role avec la policy "AmazonS3FullAccess" pour pouvoir déposer l'application dans un bucket S3
+- On créé une variable d'environnement qu'on pourra réutiliser dans notre fichier buildspec.yaml  
+![env variables](img/image-5.png)  
 
+#### 5.3 Construction d'un fichier buildspec.yaml
 
-
-
-
-
-
-
-
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.3.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Ajout du fichier [buildspec.yaml](buildspec.yaml), qui servira à CodeBuild pour les différentes étapes de build et de test.  
