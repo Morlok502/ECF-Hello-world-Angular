@@ -1,5 +1,6 @@
 ﻿version: 0.2
 
+env:
   variables:
     APP_NAME: "hello-world-angular"
 phases:
