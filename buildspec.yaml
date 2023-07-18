@@ -10,6 +10,7 @@ phases:
     commands:
       # - npm install
       # Install the Angular CLI
+      - whoami
       - echo "----- Install Angular CLI -----"
       - npm install -g @angular/cli
 
@@ -40,7 +41,7 @@ phases:
 
       # install chrome
       - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-      - apt install ./google-chrome-stable_current_amd64.deb
+      - apt install -y ./google-chrome-stable_current_amd64.deb
       # Print out missing libs
       - echo "Missing Libs" || ldd ./node_modules/puppeteer/.local-chromium/linux-549031/chrome-linux/chrome | grep not
 
