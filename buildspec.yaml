@@ -5,7 +5,7 @@ env:
     APP_NAME: "hello-world-angular"
 phases:
   install:
-      runtime-versions:
+    runtime-versions:
       nodejs: latest
     commands:
       - echo "----- Install nodejs, npm & nest.js -----"
