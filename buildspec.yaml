@@ -68,5 +68,5 @@ phases:
 artifacts:
   files:
     - '**/*'
-  # discard-paths: yes
-  # base-directory: 'dist/ecf-hello-world-angular*'
+  discard-paths: yes
+  base-directory: 'dist/ecf-hello-world-angular*'
