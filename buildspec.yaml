@@ -8,26 +8,65 @@ phases:
     runtime-versions:
       nodejs: latest
     commands:
-      - echo "----- Install nodejs, npm & nest.js -----"
-      - npm install && npm install -g @angular/cli
-  pre_build:
-    on-failure: ABORT
-    commands:
+      # - npm install
+      # Install the Angular CLI
+      - echo "----- Install Angular CLI -----"
+      - npm install -g @angular/cli
+
+      # Install puppeteer as a dev dependency
+      - npm i -D puppeteer
+      - npm i –D @angular-devkit/build-angular
+
+      # Print out missing libs
+      - echo "Missing Libs" || ldd ./node_modules/puppeteer/.local-chromium/linux-549031/chrome-linux/chrome | grep not
+
+      # Upgrade apt
+      - apt-get upgrade
+
+      # Update libs
+      - apt-get update
+
+      # Install apt-transport-https
+      - apt-get install -y apt-transport-https
+
+      # Use apt to install the Chrome dependencies
+      - apt-get install -y libxcursor1
+      - apt-get install -y libgtk-3-dev
+      - apt-get install -y libxss1
+      - apt-get install -y libasound2
+      - apt-get install -y libnspr4
+      - apt-get install -y libnss3
+      - apt-get install -y libx11-xcb1
+
+      # Print out missing libs
+      - echo "Missing Libs" || ldd ./node_modules/puppeteer/.local-chromium/linux-549031/chrome-linux/chrome | grep not
+
+      # Install project dependencies
       - echo "----- Install npm -----"
       - npm install
-      - echo "----- Test $APP_NAME app -----"
-      - ng test
-  build:
+
+  pre_build:
     commands:
+	  - echo "----- Nothing to pre_build -----"
+
+  build:
+    # on-failure: ABORT
+    commands:
+      - printenv
+      # Build the project
       - echo "----- Build $APP_NAME app -----"
       - ng build
+      # Run headless Chrome tests
+      - echo "----- Test $APP_NAME app -----"
+      - ng test --watch=false
   post_build:
     commands:
+      - printenv
       - echo "----- Uplload to S3 $APP_NAME bucket -----"
       - cd dist/ecf-hello-world-angular
       - ls -la
-    # - aws s3 cp index.html s3://hello-world-angular/index.html --cache-control max-age=$CACHE_CONTROL
-      - aws s3 sync . s3://hello-world-angular --delete
+      - aws s3 sync . s3://${BUCKET_NAME} --delete
+
 
 artifacts:
   files:
