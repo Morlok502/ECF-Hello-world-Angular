@@ -38,6 +38,9 @@ phases:
       - apt-get install -y libnss3
       - apt-get install -y libx11-xcb1
 
+      # install chrome
+      - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      - apt install ./google-chrome-stable_current_amd64.deb
       # Print out missing libs
       - echo "Missing Libs" || ldd ./node_modules/puppeteer/.local-chromium/linux-549031/chrome-linux/chrome | grep not
 
