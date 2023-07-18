@@ -1,0 +1,33 @@
+﻿version: 0.2
+
+  variables:
+    APP_NAME: "hello-world-angular"
+phases:
+  install:
+      runtime-versions:
+      nodejs: latest
+    commands:
+      - echo "----- Install nodejs, npm & nest.js -----"
+      - npm install && npm install -g @angular/cli
+  pre_build:
+    on-failure: ABORT
+    commands:
+      - echo "----- Install npm -----"
+      - npm install
+  build:
+    commands:
+      - echo "----- Building $APP_NAME app -----"
+      - ng build
+  post_build:
+    commands:
+      - echo "----- Uplload to S3 $APP_NAME bucket -----"
+      - cd dist/ecf-hello-world-angular
+      - ls -la
+    # - aws s3 cp index.html s3://hello-world-angular/index.html --cache-control max-age=$CACHE_CONTROL
+      - aws s3 sync . s3://hello-world-angular --delete
+
+artifacts:
+  files:
+    - '**/*'
+  discard-paths: yes
+  base-directory: 'dist/ecf-hello-world-angular*'
