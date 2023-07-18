@@ -15,9 +15,11 @@ phases:
     commands:
       - echo "----- Install npm -----"
       - npm install
+      - echo "----- Test $APP_NAME app -----"
+      - ng test
   build:
     commands:
-      - echo "----- Building $APP_NAME app -----"
+      - echo "----- Build $APP_NAME app -----"
       - ng build
   post_build:
     commands:
