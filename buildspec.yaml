@@ -45,25 +45,25 @@ phases:
       - echo "----- Install npm -----"
       - npm install
 
-pre_build:
-  commands:
-    - echo "----- Nothing to pre_build -----"
+  pre_build:
+      commands:
+      - echo "----- Nothing to pre_build -----"
 
-build:
-  # on-failure: ABORT
-  commands:
-    - printenv
-    # Build the project
-    - echo "----- Build $APP_NAME app -----"
-    - ng build
-    # Run headless Chrome tests
-    - echo "----- Test $APP_NAME app -----"
-    - ng test --watch=false
-post_build:
-  commands:
-    - printenv
-    - echo "----- Uplload to S3 $APP_NAME bucket -----"
-    - if [ ${CODEBUILD_BUILD_SUCCEEDING}=1 ]; then aws s3 sync --delete dist/ "s3://${BUCKET_NAME}"; else echo "Skipping aws sync"; fi
+  build:
+    # on-failure: ABORT
+    commands:
+      - printenv
+      # Build the project
+      - echo "----- Build $APP_NAME app -----"
+      - ng build
+      # Run headless Chrome tests
+      - echo "----- Test $APP_NAME app -----"
+      - ng test --watch=false
+  post_build:
+    commands:
+      - printenv
+      - echo "----- Uplload to S3 $APP_NAME bucket -----"
+      - if [ ${CODEBUILD_BUILD_SUCCEEDING}=1 ]; then aws s3 sync --delete dist/ "s3://${BUCKET_NAME}"; else echo "Skipping aws sync"; fi
 
 artifacts:
   files:
