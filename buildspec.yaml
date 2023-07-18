@@ -63,13 +63,10 @@ post_build:
   commands:
     - printenv
     - echo "----- Uplload to S3 $APP_NAME bucket -----"
-    - cd dist/ecf-hello-world-angular
-    - ls -la
-    - aws s3 sync . s3://${BUCKET_NAME} --delete
-
+    - if [ ${CODEBUILD_BUILD_SUCCEEDING}=1 ]; then aws s3 sync --delete dist/ "s3://${BUCKET_NAME}"; else echo "Skipping aws sync"; fi
 
 artifacts:
   files:
     - '**/*'
-  discard-paths: yes
-  base-directory: 'dist/ecf-hello-world-angular*'
+  # discard-paths: yes
+  # base-directory: 'dist/ecf-hello-world-angular*'
