@@ -58,7 +58,7 @@ phases:
       - ng build
       # Run headless Chrome tests
       - echo "----- Test $APP_NAME app -----"
-      - ng test --watch	=false
+      - ng test --watch=false
   post_build:
     commands:
       - printenv
