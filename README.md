@@ -72,3 +72,8 @@ On en créé un avec les caractéristiques suivantes :
 #### 5.3 Construction d'un fichier buildspec.yaml
 
 Ajout du fichier [buildspec.yaml](buildspec.yaml), qui servira à CodeBuild pour les différentes étapes de build et de test.  
+
+
+### Sources utilisées
+[AWS - How to Run Headless Front-End Tests with AWS Cloud9 and AWS CodeBuild](https://aws.amazon.com/fr/blogs/devops/how-to-run-headless-front-end-tests-with-aws-cloud9-and-aws-codebuild/)   
+
