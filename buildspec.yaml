@@ -25,7 +25,7 @@ phases:
       - cd dist/ecf-hello-world-angular
       - ls -la
     # - aws s3 cp index.html s3://hello-world-angular/index.html --cache-control max-age=$CACHE_CONTROL
-      - aws s3 sync . s3://hello-world-angular # --delete
+      - aws s3 sync . s3://hello-world-angular --delete
 
 artifacts:
   files:
