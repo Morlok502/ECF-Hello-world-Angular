@@ -63,8 +63,9 @@ phases:
     commands:
       - printenv
       - echo "----- Uplload to S3 $APP_NAME bucket -----"
-      - if [ ${CODEBUILD_BUILD_SUCCEEDING}=1 ]; then aws s3 sync --delete dist/ "s3://${BUCKET_NAME}"; else echo "Skipping aws sync"; fi
-
+      - cd dist/ecf-hello-world-angular
+      - ls -la
+      - aws s3 sync . s3://${BUCKET_NAME} --delete
 artifacts:
   files:
     - '**/*'
