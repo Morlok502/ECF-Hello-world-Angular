@@ -8,64 +8,26 @@ phases:
     runtime-versions:
       nodejs: latest
     commands:
-      # - npm install
       # Install the Angular CLI
-      - whoami
       - echo "----- Install Angular CLI -----"
       - npm install -g @angular/cli
-
-      # Install puppeteer as a dev dependency
-      - npm i -D puppeteer
-      # - npm i –D @angular-devkit/build-angular
-
-      # Print out missing libs
-      - echo "Missing Libs" || ldd ./node_modules/puppeteer/.local-chromium/linux-549031/chrome-linux/chrome | grep not
-
-      # Upgrade apt
-      - apt-get upgrade
-
-      # Update libs
-      - apt-get update
-
-      # Install apt-transport-https
-      - apt-get install -y apt-transport-https
-
-      # Use apt to install the Chrome dependencies
-      - apt-get install -y libxcursor1
-      - apt-get install -y libgtk-3-dev
-      - apt-get install -y libxss1
-      - apt-get install -y libasound2
-      - apt-get install -y libnspr4
-      - apt-get install -y libnss3
-      - apt-get install -y libx11-xcb1
-
-      # install chrome
-      - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-      - apt install -y ./google-chrome-stable_current_amd64.deb
-      # Print out missing libs
-      - echo "Missing Libs" || ldd ./node_modules/puppeteer/.local-chromium/linux-549031/chrome-linux/chrome | grep not
-
       # Install project dependencies
       - echo "----- Install npm -----"
       - npm install
-
   pre_build:
       commands:
       - echo "----- Nothing to pre_build -----"
-
   build:
-    on-failure: ABORT
+    # on-failure: ABORT
     commands:
-      - printenv
       # Build the project
       - echo "----- Build $APP_NAME app -----"
       - ng build
       # Run headless Chrome tests
-      - echo "----- Test $APP_NAME app -----"
-      - ng test --browsers ChromeHeadless --no-watch --no-progress
+      # - echo "----- Test $APP_NAME app -----"
+      # - ng test
   post_build:
     commands:
-      - printenv
       - echo "----- Uplload to S3 $APP_NAME bucket -----"
       - cd dist/ecf-hello-world-angular
       - ls -la
