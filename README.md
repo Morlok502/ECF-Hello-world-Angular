@@ -10,12 +10,10 @@ ___
       - [4.2 Initialisation d'un projet angular](#42-initialisation-dun-projet-angular)
     - [5. Écrivez le script qui build/test et le Angular (circle ci est accepté)](#5-écrivez-le-script-qui-buildtest-et-le-angular-circle-ci-est-accepté)
       - [5.1 Commandes pour lancer des tests](#51-commandes-pour-lancer-des-tests)
-  - [Development server](#development-server)
-  - [Code scaffolding](#code-scaffolding)
-  - [Build](#build)
-  - [Running unit tests](#running-unit-tests)
-  - [Running end-to-end tests](#running-end-to-end-tests)
-  - [Further help](#further-help)
+      - [5.2 Construction d'un pipeline dans AWS CodePipeline](#52-construction-dun-pipeline-dans-aws-codepipeline)
+      - [5.2 Construction d'un Build dans AWS CodeBuild](#52-construction-dun-build-dans-aws-codebuild)
+      - [5.3 Construction d'un fichier buildspec.yaml](#53-construction-dun-fichier-buildspecyaml)
+    - [Sources utilisées](#sources-utilisées)
 
 ## Activité Type 2 : Déploiement d’une application en continu
 
@@ -76,4 +74,4 @@ Ajout du fichier [buildspec.yaml](buildspec.yaml), qui servira à CodeBuild pour
 
 ### Sources utilisées
 [AWS - How to Run Headless Front-End Tests with AWS Cloud9 and AWS CodeBuild](https://aws.amazon.com/fr/blogs/devops/how-to-run-headless-front-end-tests-with-aws-cloud9-and-aws-codebuild/)   
-
+[Angular - ng test](https://angular.io/cli/test)  
