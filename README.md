@@ -59,6 +59,8 @@ On construit un pipeline avec les caractéristiques suivantes :
 - on créé une connexion avec notre repository github
 - on créé un projet Build (CodeBuild)
 - on indique le déploiement dans un bucket S3
+![pipeline](img/image-6.png)  
+
 
 #### 5.2 Construction d'un projet Build dans AWS CodeBuild
 
