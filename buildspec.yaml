@@ -8,18 +8,41 @@ phases:
     runtime-versions:
       nodejs: latest # Spécifie la version de nodejs à utiliser
     commands:
-      - echo "----- Install Angular CLI -----"
       - npm install -g @angular/cli #Installe Angular CLI
-      - echo "----- Install npm -----"
+      - npm i -D puppeteer # Installe Puppeteer pour les tests e2e
+      - npm i –D @angular-devkit/build-angular # Installe les dépendances pour les tests e2e
+      - echo "Missing Libs" || ldd ./node_modules/puppeteer/.local-chromium/linux-549031/chrome-linux/chrome | grep not # Affiche les librairies manquantes
+      - apt-get upgrade # Met à jour les paquets
+      - apt-get update # Met à jour l'index des paquets
+      # Install apt-transport-https
+      - apt-get install -y apt-transport-https
+
+      # Use apt to install the Chrome dependencies
+      - apt-get install -y libxcursor1
+      - apt-get install -y libgtk-3-dev
+      - apt-get install -y libxss1
+      - apt-get install -y libasound2
+      - apt-get install -y libnspr4
+      - apt-get install -y libnss3
+      - apt-get install -y libx11-xcb1
+
+      # Print out missing libs
+      - echo "Missing Libs" || ldd ./node_modules/puppeteer/.local-chromium/linux-549031/chrome-linux/chrome | grep not
+
       - npm ci #Installe les dépendances du projet
+  
+  pre_build:
+    commands
+	  - echo "Nothing to pre_build"
+  
   build:
     # on-failure: ABORT
     commands:
-      - echo "----- Build $APP_NAME app -----"
-      - ng build # Build l'application
+      - printenv # Affiche les variables d'environnement
+      - ng build # Build le projet Angular
       # Run headless Chrome tests
-      # - echo "----- Test $APP_NAME app -----"
-      # - ng test
+      - ng test --watch=false
+      - printenv
   post_build:
     commands:
       - echo "----- Uplload to S3 $APP_NAME bucket -----"
