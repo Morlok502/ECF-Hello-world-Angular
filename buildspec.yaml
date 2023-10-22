@@ -32,7 +32,7 @@ phases:
       - npm ci #Installe les dépendances du projet
   
   pre_build:
-    commands
+    commands:
       - echo "Nothing to pre_build"
 
   build:
