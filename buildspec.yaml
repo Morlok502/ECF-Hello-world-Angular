@@ -10,7 +10,7 @@ phases:
     commands:
       - npm install -g @angular/cli #Installe Angular CLI
       - npm i -D puppeteer # Installe Puppeteer pour les tests e2e
-      - npm i –D @angular-devkit/build-angular # Installe les dépendances pour les tests e2e
+      - npm i @angular-devkit/build-angular # Installe les dépendances pour les tests e2e
       - echo "Missing Libs" || ldd ./node_modules/puppeteer/.local-chromium/linux-549031/chrome-linux/chrome | grep not # Affiche les librairies manquantes
       - apt-get upgrade # Met à jour les paquets
       - apt-get update # Met à jour l'index des paquets
