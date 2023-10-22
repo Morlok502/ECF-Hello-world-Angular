@@ -12,8 +12,8 @@ phases:
       - npm i -D puppeteer # Installe Puppeteer pour les tests e2e
       - npm i @angular-devkit/build-angular # Installe les dépendances pour les tests e2e
       - echo "Missing Libs" || ldd ./node_modules/puppeteer/.local-chromium/linux-549031/chrome-linux/chrome | grep not # Affiche les librairies manquantes
-      - apt-get update # Met à jour l'index des paquets
       - apt-get upgrade -y # Met à jour les paquets
+      - apt-get update # Met à jour l'index des paquets
       # Install apt-transport-https
       - apt-get install -y apt-transport-https
 
@@ -41,13 +41,12 @@ phases:
       - printenv # Affiche les variables d'environnement
       - ng build # Build le projet Angular
       # Run headless Chrome tests
-      - ng test --watch=false
+      - ng test --watch=false --browsers=ChromeHeadless
       - printenv
   post_build:
     commands:
       - echo "----- Uplload to S3 $APP_NAME bucket -----"
       - cd dist/ecf-hello-world-angular # Se déplace dans le dossier de build
-      - ls -la
       - aws s3 sync . s3://${BUCKET_NAME} --delete # Upload le contenu du dossier de build dans le bucket S3
 artifacts:
   files:
