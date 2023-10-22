@@ -6,34 +6,28 @@ env:
 phases:
   install:
     runtime-versions:
-      nodejs: latest
+      nodejs: latest # Spécifie la version de nodejs à utiliser
     commands:
-      # Install the Angular CLI
       - echo "----- Install Angular CLI -----"
-      - npm install -g @angular/cli
-      # Install project dependencies
+      - npm install -g @angular/cli #Installe Angular CLI
       - echo "----- Install npm -----"
-      - npm install
-  pre_build:
-      commands:
-      - echo "----- Nothing to pre_build -----"
+      - npm ci #Installe les dépendances du projet
   build:
     # on-failure: ABORT
     commands:
-      # Build the project
       - echo "----- Build $APP_NAME app -----"
-      - ng build
+      - ng build # Build l'application
       # Run headless Chrome tests
       # - echo "----- Test $APP_NAME app -----"
       # - ng test
   post_build:
     commands:
       - echo "----- Uplload to S3 $APP_NAME bucket -----"
-      - cd dist/ecf-hello-world-angular
+      - cd dist/ecf-hello-world-angular # Se déplace dans le dossier de build
       - ls -la
-      - aws s3 sync . s3://${BUCKET_NAME} --delete
+      - aws s3 sync . s3://${BUCKET_NAME} --delete # Upload le contenu du dossier de build dans le bucket S3
 artifacts:
   files:
-    - '**/*'
-  discard-paths: yes
-  base-directory: 'dist/ecf-hello-world-angular*'
+    - '**/*' # Upload tous les fichiers du dossier de build
+  discard-paths: yes # Ne pas uploader le chemin du dossier de build
+  base-directory: 'dist/ecf-hello-world-angular*' # Spécifie le dossier de build
