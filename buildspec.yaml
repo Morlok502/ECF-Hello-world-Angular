@@ -33,8 +33,8 @@ phases:
   
   pre_build:
     commands
-	  - echo "Nothing to pre_build"
-  
+      - echo "Nothing to pre_build"
+
   build:
     # on-failure: ABORT
     commands:
